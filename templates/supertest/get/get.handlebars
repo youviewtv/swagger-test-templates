@@ -28,7 +28,8 @@
       .set('{{headerApiKey.type}}', process.env.{{headerApiKey.name}})
       {{/if}}
       {{#if default}}
-      .expect('DEFAULT RESPONSE CODE HERE')
+      {{debug}}
+      .expect('{{responseCode}}_error_response')
       {{else}}
       .expect({{responseCode}})
       {{/if}}
