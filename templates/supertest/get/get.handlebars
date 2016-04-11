@@ -28,7 +28,6 @@
       .set('{{headerApiKey.type}}', process.env.{{headerApiKey.name}})
       {{/if}}
       {{#if default}}
-      {{debug}}
       .expect('{{responseCode}}_error_response')
       {{else}}
       .expect({{responseCode}})

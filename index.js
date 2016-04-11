@@ -628,3 +628,15 @@ handlebars.registerHelper('length', function(description) {
   }
   return strObj(description).truncate(len - 50).s;
 });
+
+handlebars.registerHelper("debug", function(optionalValue) {
+    console.log("Current Context");
+    console.log("====================");
+    console.log(this);
+
+    if (optionalValue) {
+        console.log("Value");
+        console.log("====================");
+        console.log(optionalValue);
+    }
+});
