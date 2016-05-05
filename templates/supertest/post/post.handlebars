@@ -9,7 +9,7 @@
       {{#ifCond queryParameters queryApiKey}}
       .query({
         {{#if queryApiKey}}{{queryApiKey.type}}: process.env.{{queryApiKey.name}}{{#if queryParameters}},
-        {{/if}}{{/if}}{{#if queryParameters}}{{#each queryParameters}}{{this.name}}: 'DATA GOES HERE'{{#unless @last}},{{/unless}}{{/each}}{{/if}}
+        {{/if}}{{/if}}{{#if queryParameters}}{{#each queryParameters}}{{this.name}}: 'MAGA DATA GOES HERE'{{#unless @last}},{{/unless}}{{/each}}{{/if}}
       })
       {{/ifCond}}
       {{#if headerSecurity}}
@@ -19,7 +19,7 @@
       {{#if headerParameters}}
       .set({
         {{#each headerParameters}}
-        '{{this.name}}': 'DATA GOES HERE'{{#unless @last}},{{/unless}}
+        '{{this.name}}': '{{../this.path}}/post/{{../this.responseCode}}/{{this.name}}'{{#unless @last}},{{/unless}}
         {{/each}}
       })
       {{/if}}
@@ -29,7 +29,7 @@
       {{#is contentType 'application/json'}}
       .send({
         {{#each bodyParameters}}
-        {{this.name}}: 'DATA GOES HERE'{{#unless @last}},{{/unless}}
+        {{this.name}}: '{{../this.path}}/post/{{../this.responseCode}}/{{this.name}}'{{#unless @last}},{{/unless}}
         {{/each}}
       })
       {{/is}}
@@ -48,7 +48,7 @@
       })
       {{/is}}
       {{#if default}}
-      .expect('DEFAULT RESPONSE CODE HERE')
+      .expect('{{responseCode}}_error_response')
       {{else}}
       .expect({{responseCode}})
       {{/if}}
