@@ -601,14 +601,14 @@ handlebars.registerHelper('pathify', function(path, pathParams) {
         path = path.replace(re2, pathParams[match]);
       } else {
         // console.log("No match found for "+match+": "+pathParams[match]);
-        path = path.replace(re2, '{' + match + ' PARAM GOES HERE}');
+        path = path.replace(re2, 'config[' + match + ' PARAM GOES HERE]');
       }
     }
     return path;
   }
 
   r = new RegExp(/(?:\{+)(.*?(?=\}))(?:\}+)/g);
-  return path.replace(r, '{$1 PARAM GOES HERE}');
+  return path.replace(r, '{$1}');
 });
 
 /**

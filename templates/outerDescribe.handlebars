@@ -7,6 +7,8 @@ var request = require('request');
 {{/is}}
 {{#is testmodule 'supertest'}}
 var supertest = require('supertest');
+
+var config=require("../config{{this.description}}_config.js");
 var api = supertest('{{scheme}}://{{host}}'); // supertest init;
 {{/is}}
 {{#is assertion 'expect'}}

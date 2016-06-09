@@ -13,13 +13,13 @@
       })
       {{/ifCond}}
       {{#if headerSecurity}}
-      .set('Authorization', '{{headerSecurity.type}} ' + process.env.{{headerSecurity.name}})
+      .set('Authorization', '{{headerSecurity.type}} ' + configData['process.env.{{headerSecurity.name}}'])
       {{/if}}
       .set('Accept', '{{contentType}}')
       {{#if headerParameters}}
       .set({
         {{#each headerParameters}}
-        '{{this.name}}': '{{../this.path}}/post/{{../this.responseCode}}/{{this.name}}'{{#unless @last}},{{/unless}}
+        '{{this.name}}': configData['{{../this.path}}/post/{{../this.responseCode}}/{{this.name}}']{{#unless @last}},{{/unless}}
         {{/each}}
       })
       {{/if}}
@@ -27,11 +27,11 @@
       .set('{{headerApiKey.type}}', process.env.{{headerApiKey.name}})
       {{/if}}
       {{#is contentType 'application/json'}}
-      .send({
+      .send(
         {{#each bodyParameters}}
-        {{this.name}}: '{{../this.path}}/post/{{../this.responseCode}}/{{this.name}}'{{#unless @last}},{{/unless}}
+        configData['{{../this.path}}/post/{{../this.responseCode}}/{{this.name}}']{{#unless @last}},{{/unless}}
         {{/each}}
-      })
+      )
       {{/is}}
       {{#is contentType 'application/x-www-form-urlencoded'}}
       .send({
