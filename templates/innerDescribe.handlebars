@@ -1,6 +1,14 @@
 describe('{{description}}', function() {
-before(function(){before_all_tests});
-{{#each tests}}
+    var configData=null;
+    before(function(done) {
+      config.setupMethod()
+          .then(function(data) {
+              configData = data;
+              done();
+          });
+    });
+
+  {{#each tests}}
   {{this}}
 {{/each}}
   });
