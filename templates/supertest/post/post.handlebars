@@ -57,13 +57,34 @@
 
         {{#validateResponse returnType noSchema}}
         {{#is ../assertion 'expect'}}
-        expect(validator.validate(res.body, schema)).to.be.true;
+       // expect(validator.validate(res.body, schema)).to.be.true;
+         var validate=validator(schema);
+                         res=validate(res.body);
+                         if(res==false){
+                           console.log(validate.errors);
+                           res.should.be.true;
+                         }
+
         {{/is}}
         {{#is ../assertion 'should'}}
-        validator.validate(res.body, schema).should.be.true;
+       // validator.validate(res.body, schema).should.be.true;
+         var validate=validator(schema);
+                         res=validate(res.body);
+                         if(res==false){
+                           console.log(validate.errors);
+                           res.should.be.true;
+                         }
+
         {{/is}}
         {{#is ../assertion 'assert'}}
-        assert.true(validator.validate(res.body, schema));
+       // assert.true(validator.validate(res.body, schema));
+         var validate=validator(schema);
+                         res=validate(res.body);
+                         if(res==false){
+                           console.log(validate.errors);
+                           res.should.be.true;
+                         }
+
         {{/is}}
         {{else}}
         {{#is ../assertion 'expect'}}
